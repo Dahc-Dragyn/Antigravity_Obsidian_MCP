@@ -71,25 +71,37 @@ Performs a recursive, case-insensitive, high-performance full-text search across
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started (Choose Your Route)
 
-### 📋 Prerequisites
-- **Rust Toolchain:** Install Rust and Cargo (edition 2021).
+Rust compiles down to a **single, standalone, native executable** (`.exe` on Windows) with **zero runtime dependencies**. 
 
-### ⚙️ Build the Server
-Clone the repository and build an optimized release binary:
+> [!TIP]
+> **The Rust Advantage:**
+> - **Zero Runtimes Needed:** No Node.js, Python, or Rust runtime environments are required to execute this server!
+> - **Zero Dependency Executable:** You do **not** need to install the Rust compiler or Cargo unless you explicitly want to build the code from source.
 
-```powershell
-# Navigate to the server folder
-cd obsidian_mcp
+---
 
-# Build the release binary
-cargo build --release
-```
+### Option A: Direct Installation (Zero Setup - Recommended)
 
-The compiled binary will be placed at:
-- **Windows:** `target/release/obsidian_mcp.exe`
-- **Linux/macOS:** `target/release/obsidian_mcp`
+If you already have the pre-compiled `obsidian_mcp.exe` binary (e.g., inside `C:\Antigravity projects\Rust\obsidian_mcp\target\release\obsidian_mcp.exe` or downloaded from a release):
+
+1. Place the `obsidian_mcp.exe` executable in a convenient folder on your machine.
+2. Directly configure your MCP Client (see below) to point to the absolute path of that `.exe`. That is all!
+
+---
+
+### Option B: Build From Source (For Developers)
+
+If you want to compile the server yourself from source:
+
+1. **Prerequisite:** Install the standard [Rust & Cargo Toolchain](https://rustup.rs/).
+2. Open your terminal, navigate to the project directory, and compile the optimized release binary:
+   ```powershell
+   cargo build --release
+   ```
+3. Your freshly minted, standalone executable is now built and available at:
+   `target/release/obsidian_mcp.exe`
 
 ---
 
