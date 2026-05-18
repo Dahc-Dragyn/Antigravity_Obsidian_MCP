@@ -11,6 +11,16 @@ This server implements the formal MCP specification using high-fidelity JSON-RPC
 
 ---
 
+## 📖 Specialized User Manuals
+
+To make setup and operations as seamless as possible, we have crafted dedicated manuals for both humans and AI agents:
+
+- 🖥️ **[Human Installation Guide (INSTALLATION.md)](INSTALLATION.md)** — Step-by-step native setup guide, path configurations (`mcp_config.json` / `claude_desktop_config.json`), and visual checklists.
+- 🤖 **[AI Agent System Manual (AI_INSTRUCTIONS.md)](AI_INSTRUCTIONS.md)** — Specialized behavioral guidelines, best practices for knowledge graph curation (`[[WikiLinks]]`), and operational directives for AI agents reading this repository.
+- 📦 **[Pre-compiled Binary (/bin/)](bin/)** — Grab the standalone Windows binary (`obsidian_mcp.exe`) immediately.
+
+---
+
 ## 🏗️ Architecture Overview
 
 The server operates strictly over standard input (`stdin`) and standard output (`stdout`), communicating via JSON-RPC 2.0 frames. All system diagnostics, informational heartbeat logs, and runtime warnings are directed exclusively to standard error (`stderr`) to prevent the corruption of the JSON-RPC communication channel.
@@ -84,10 +94,10 @@ Rust compiles down to a **single, standalone, native executable** (`.exe` on Win
 
 ### Option A: Direct Installation (Zero Setup - Recommended)
 
-If you already have the pre-compiled `obsidian_mcp.exe` binary (e.g., inside `C:\Antigravity projects\Rust\obsidian_mcp\target\release\obsidian_mcp.exe` or downloaded from a release):
+If you already have the pre-compiled `obsidian_mcp.exe` binary (e.g., inside [bin/obsidian_mcp.exe](bin/obsidian_mcp.exe) or downloaded from a release):
 
 1. Place the `obsidian_mcp.exe` executable in a convenient folder on your machine.
-2. Directly configure your MCP Client (see below) to point to the absolute path of that `.exe`. That is all!
+2. Directly configure your MCP Client to point to the absolute path of that `.exe`. That is all! For step-by-step path settings, read the **[INSTALLATION.md](INSTALLATION.md)**.
 
 ---
 
@@ -111,77 +121,7 @@ The server requires the path to your target Obsidian vault. This path can be sup
 1. An environment variable named `OBSIDIAN_VAULT_PATH`.
 2. A CLI argument passed directly to the binary as the first parameter.
 
----
-
-### 👾 Antigravity AI Integration
-
-Antigravity operates with a global MCP manager config file. To integrate this server so your Antigravity agent can manage your notes:
-
-1. **Locate your Antigravity MCP Config file:**
-   - Open Windows Explorer and navigate to:
-     `C:\Users\<YourUsername>\.gemini\antigravity\mcp_config.json`
-     *(Alternatively, copy and paste `%USERPROFILE%\.gemini\antigravity\mcp_config.json` into your file explorer search bar).*
-
-2. **Add the `obsidian` definition under `mcpServers`:**
-   Open the `mcp_config.json` file in a text editor (like Notepad or VS Code) and add the following entry inside the `"mcpServers"` object:
-
-   ```json
-   "obsidian": {
-       "command": "C:\\Antigravity projects\\Rust\\obsidian_mcp\\target\\release\\obsidian_mcp.exe",
-       "args": [],
-       "env": {
-           "OBSIDIAN_VAULT_PATH": "C:\\Users\\YourUsername\\Documents\\ObsidianVault"
-       }
-   }
-   ```
-   *(Ensure you replace `YourUsername` with your actual Windows username and set `OBSIDIAN_VAULT_PATH` to the absolute path of your Obsidian vault. Use double-escaped backslashes `\\` for all Windows paths).*
-
-3. **Restart the Antigravity session:**
-   - Restart or start a new Antigravity session. The agent will automatically detect the new `obsidian` capabilities and begin servicing your requests using the vault!
-
----
-
-### 💬 Claude Desktop Integration
-To use this server with Claude Desktop, edit your `claude_desktop_config.json` (located at `%APPDATA%\Claude\claude_desktop_config.json` on Windows):
-
-```json
-{
-  "mcpServers": {
-    "obsidian-mcp": {
-      "command": "C:\\Antigravity projects\\Rust\\obsidian_mcp\\target\\release\\obsidian_mcp.exe",
-      "args": [],
-      "env": {
-        "OBSIDIAN_VAULT_PATH": "C:\\Users\\YourUsername\\Documents\\ObsidianVault"
-      }
-    }
-  }
-}
-```
-
-Alternatively, configure it using direct arguments:
-
-```json
-{
-  "mcpServers": {
-    "obsidian-mcp": {
-      "command": "C:\\Antigravity projects\\Rust\\obsidian_mcp\\target\\release\\obsidian_mcp.exe",
-      "args": ["C:\\Users\\YourUsername\\Documents\\ObsidianVault"]
-    }
-  }
-}
-```
-
----
-
-### 🛰️ Cursor Integration
-To configure the Obsidian MCP server in Cursor:
-1. Open Cursor and navigate to **Settings** > **Cursor Settings** > **Features** > **MCP**.
-2. Click **+ Add New MCP Server**.
-3. Fill in the configuration:
-   - **Name:** `obsidian-mcp`
-   - **Type:** `command`
-   - **Command:** `C:\Antigravity projects\Rust\obsidian_mcp\target\release\obsidian_mcp.exe "C:\Users\YourUsername\Documents\ObsidianVault"`
-4. Click **Save** and verify that the status lights turn green.
+Read **[INSTALLATION.md](INSTALLATION.md)** for full detail on configuring environment variables or command-line parameters inside your client JSON files.
 
 ---
 
