@@ -1,0 +1,25 @@
+# Added by cargo
+# Run 'cargo clean' to remove all build artifacts
+/target
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Local environment/config files
+.env
+.env.*
+mcp_config.json
+
+# Backup files
+*.rs.bk
+*.bak
